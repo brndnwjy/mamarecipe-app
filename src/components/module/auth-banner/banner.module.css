@@ -1,0 +1,29 @@
+.banner {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(241, 188, 15, 0.83),
+      rgba(241, 188, 15, 0.83)
+    ),
+    url("/src/assets/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner h2 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 540px){
+    .banner {
+        display: none;
+    }
+}
