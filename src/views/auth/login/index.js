@@ -23,7 +23,7 @@ const Login = () => {
         <h1 className={styles.title}>Welcome</h1>
         <p className={styles.subtitle}>Log in into your exsisting account</p>
         <div className={styles.hl} />
-        <form className={`d-flex flex-column ${styles.form}`}>
+        <form action="/register" className={`d-flex flex-column ${styles.form}`}>
           <Input
             label="E-mail"
             id="email"
@@ -46,7 +46,7 @@ const Login = () => {
           </div>
           <Button
             title="Log In"
-            type="button"
+            type="submit"
             classname={`mt-3 ${styles.button}`}
           />
           <small className={`my-3 align-self-end ${styles.small}`}>
