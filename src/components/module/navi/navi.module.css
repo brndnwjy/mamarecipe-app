@@ -1,0 +1,18 @@
+.navi {
+    min-height: 80px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.navi a,
+.navi a:focus {
+    text-decoration: none;
+    color: #2E266F;
+    font-size: 18px;
+    font-weight: 500;
+    outline: none;
+}
+
+.navi a:hover {
+    text-decoration: underline;
+}
