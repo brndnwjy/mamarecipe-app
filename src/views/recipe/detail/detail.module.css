@@ -1,3 +1,41 @@
+.recipe h1 {
+  color: #2E266F;
+  font-size: 60px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.ingredient h2,
+.video h2,
+.commentary h2 {
+  color: #3f3a3a;
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.ingredient li {
+  list-style-type: "- ";
+  color: #000000;
+  font-size: 26px;
+  font-weight: 300;
+}
+
+.video {
+  margin-bottom: 50px;
+}
+
+.video-btn {
+  height: 50px;
+  width: 20%;
+  background-color: #EFC81A; 
+
+}
+
+.comment-field {
+  margin-bottom: 50px;  
+}
+
 .textarea,
 .textarea:focus {
   width: 100%;
@@ -8,4 +46,13 @@
   border-radius: 8px;
   outline: none;
   resize: none;
+}
+
+.comment-btn {
+  height: 50px;
+  width: 30%;
+  background-color: #EFC81A; 
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
 }

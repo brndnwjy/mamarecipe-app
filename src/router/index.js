@@ -8,7 +8,8 @@ import Reset from "../views/auth/resetpassword";
 import Insert from "../views/recipe/insert";
 import Detail from "../views/recipe/detail";
 import DetailVideo from "../views/recipe/detailvideo";
-
+import Home from "../views/home";
+import Profile from "../views/profile";
 
 const Router = () => {
   return (
@@ -23,6 +24,9 @@ const Router = () => {
         <Route path="/insert" element={<Insert />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/detailvideo" element={<DetailVideo />} />
+
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

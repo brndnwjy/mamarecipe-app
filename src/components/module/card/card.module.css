@@ -1,0 +1,23 @@
+.card {
+    width: 350px;
+    height: 350px;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.card img {
+    width: 350px;
+    border: 0;
+    border-radius: 8px;
+}
+
+.card span {
+    position: relative;
+    bottom: 50px;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 500;
+}
