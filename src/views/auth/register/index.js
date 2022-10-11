@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../auth.module.css";
 
 import Banner from "../../../components/module/auth-banner";
@@ -8,6 +9,46 @@ import Input from "../../../components/base/input";
 import Button from "../../../components/base/button";
 
 const Register = () => {
+  const navigate = useNavigate()
+
+  const [registerForm, setRegisterForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
+
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleInput = (e) => {
+    setRegisterForm({
+      ...registerForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const passwordValidate = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (registerForm.password === confirmPassword) {
+      axios
+        .post("http://localhost:4000/v1/user/register", registerForm)
+        .then((response) => {
+          console.log(response);
+          return navigate('/login')
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      alert("Password doesn't match")
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -21,15 +62,18 @@ const Register = () => {
           className={`col-12 col-md-7 d-flex flex-column align-items-center justify-content-center`}
         >
           <h1 className={styles.title}>Let's Get Started</h1>
-          <p className={styles.subtitle}>Create new account to access all features</p>
+          <p className={styles.subtitle}>
+            Create new account to access all features
+          </p>
           <div className={styles.hl} />
-          <form className={`d-flex flex-column ${styles.form}`}>
+          <form onSubmit={handleSubmit} className={`d-flex flex-column ${styles.form}`}>
             <Input
               label="Name"
               id="name"
               name="name"
               type="text"
               placeholder="Name"
+              onchange={handleInput}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -38,6 +82,7 @@ const Register = () => {
               name="email"
               type="email"
               placeholder="examplexxx@gmail.com"
+              onchange={handleInput}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -46,6 +91,7 @@ const Register = () => {
               name="phone"
               type="tel"
               placeholder="08xxxxxxxxxx"
+              onchange={handleInput}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -54,6 +100,7 @@ const Register = () => {
               name="password"
               type="password"
               placeholder="Create New Password"
+              onchange={handleInput}
               classname={`mt-2 mb-3 ${styles.input}`}
             />
             <Input
@@ -62,15 +109,16 @@ const Register = () => {
               name="confirmpassword"
               type="password"
               placeholder="Confirm Your Password"
+              onchange={passwordValidate}
               classname={`mt-2 mb-3 ${styles.input}`}
             />
             <div className={`d-flex align-items-center ${styles.tnc}`}>
-              <input type="checkbox" />
+              <input type="checkbox"/>
               <span>I agree to terms & conditions</span>
             </div>
             <Button
               title="Register Account"
-              type="button"
+              type="submit"
               classname={`mt-3 ${styles.button}`}
             />
             <p className={`mt-2 align-self-center ${styles["auth-opt"]}`}>
