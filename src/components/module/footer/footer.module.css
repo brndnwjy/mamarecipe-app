@@ -2,3 +2,42 @@
     min-height: 200px;
     background-color: #efc81a;
 }
+
+.jargon {
+    color: #2E266F;
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.tagline {
+    color: #2E266F;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.footer-link {
+    color: #707070;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.cr {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 600px) {
+    .jargon {
+        font-size: 32px;
+    }  
+
+    .tagline {
+        font-size: 16px;
+    }
+
+    .footer-link {
+        font-size: 14px;
+    }
+}

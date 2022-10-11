@@ -13,6 +13,7 @@
 .hl {
   position: absolute;
   left: 0;
+  bottom: 135px;
   border-bottom: 2px solid #dfdfdf;
 }
 
@@ -33,5 +34,9 @@
         display: flex;
         justify-content: center;
         margin: 0;
+    }
+
+    .hl {
+      bottom: 150px
     }
 }

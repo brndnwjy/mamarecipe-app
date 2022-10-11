@@ -92,11 +92,17 @@
     width: 200px;
     height: 50px;
     background-color: #efc81a;
-    color: #ffffff;
     font-size: 20px;
     font-weight: 400;
     border: none;
     border-radius: 8px;
+}
+
+.new-recipe a,
+.new-recipe a:hover {
+    text-decoration: none;
+    color: #ffffff;
+
 }
 
 .bg-block {
@@ -108,4 +114,48 @@
     background-color: #efc81a;
     margin-bottom: 200px;
     z-index: -1;
+}
+
+@media only screen and (max-width: 600px) {
+    .header {
+        min-height: max-content;
+        margin-bottom: 50px;
+    }
+
+    .subheader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .subheader h1{
+        font-size: 36px;
+    }
+
+    .header-image,
+    .yellow {
+        display: none;
+    }
+
+    .side-block,
+    .bg-block {
+        display: none;
+    }
+
+    .new-recipe {
+        margin: 0;
+    }
+
+    .new-recipe img {
+        width: 350px;
+        height: 350px;
+        margin-bottom: 0;
+    }
+
+    .new-recipe span, 
+    .new-recipe p {
+        text-align: center;
+    }
 }

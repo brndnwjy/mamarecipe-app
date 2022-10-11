@@ -40,26 +40,31 @@ const Detail = () => {
           <h2>Video Step</h2>
           <Button
             title={<img src={playicon} alt="play icon" />}
-            classname={`btn mb-4 ${styles["video-btn"]}`}
+            classname={`mb-4 ${styles["video-btn"]}`}
           />
           <Button
             title={<img src={playicon} alt="play icon" />}
-            classname={`btn mb-4 ${styles["video-btn"]}`}
+            classname={`mb-4 ${styles["video-btn"]}`}
           />
           <Button
             title={<img src={playicon} alt="play icon" />}
-            classname={`btn mb-4 ${styles["video-btn"]}`}
+            classname={`mb-4 ${styles["video-btn"]}`}
           />
         </section>
 
         <section className={styles.commentary}>
-          <form className={`d-flex flex-column align-items-center ${styles['comment-field']}`}>
+          <form
+            className={`d-flex flex-column align-items-center ${styles["comment-field"]}`}
+          >
             <textarea
               name="comment"
               placeholder="Comment :"
               className={`mb-4 ${styles.textarea}`}
             />
-            <Button title="Send" classname={`btn my-2 ${styles['comment-btn']}`} />
+            <Button
+              title="Send"
+              classname={`my-2 ${styles["comment-btn"]}`}
+            />
           </form>
 
           <h2>Comments</h2>

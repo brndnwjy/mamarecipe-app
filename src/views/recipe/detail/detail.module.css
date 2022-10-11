@@ -25,11 +25,14 @@
   margin-bottom: 50px;
 }
 
-.video-btn {
+.video-btn,
+.video-btn:focus {
   height: 50px;
   width: 20%;
   background-color: #EFC81A; 
-
+  border: none;
+  border-radius: 8px;
+  outline: none;
 }
 
 .comment-field {
@@ -48,11 +51,15 @@
   resize: none;
 }
 
-.comment-btn {
+.comment-btn,
+.comment-btn:focus {
   height: 50px;
   width: 30%;
   background-color: #EFC81A; 
   color: #ffffff;
   font-size: 20px;
   font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  outline: none;
 }

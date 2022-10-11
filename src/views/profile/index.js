@@ -1,12 +1,15 @@
 import React, { Fragment, useState } from "react";
 import Navi from "../../components/module/navi";
 import Footer from "../../components/module/footer";
+import Card from "../../components/module/card";
+import MyCard from "../../components/module/myCard";
 import Button from "../../components/base/button";
 
 import styles from "./profile.module.css";
 
 import avatar from "../../assets/avatar.jpeg";
 import editicon from "../../assets/editicon.svg";
+import headerimage from "../../assets/headerimage.png";
 
 const Profile = () => {
   const [activetab, setActivetab] = useState("myrecipe");
@@ -32,33 +35,44 @@ const Profile = () => {
         </section>
 
         <section className="container mt-5 d-flex flex-column align-items-start justify-content-center">
-          <div className={`w-100 d-flex justify-content-between justify-content-md-start ${styles['tab-option']}`}>
+          <div
+            className={`w-100 d-flex justify-content-between justify-content-md-start ${styles["tab-option"]}`}
+          >
             <Button
               title="My Recipe"
-              classname={styles['tab-btn']}
+              classname={styles["tab-btn"]}
               onclick={() => setActivetab("myrecipe")}
             />
             <Button
               title="Saved Recipe"
-              classname={styles['tab-btn']}
+              classname={styles["tab-btn"]}
               onclick={() => setActivetab("savedrecipe")}
             />
             <Button
               title="Liked Recipe"
-              classname={styles['tab-btn']}
+              classname={styles["tab-btn"]}
               onclick={() => setActivetab("likedrecipe")}
             />
+          <div className={`w-100 ${styles.hl}`} />
           </div>
 
-          <div className={`w-100 mb-3 ${styles.hl}`} />
 
-          <div className="mt-5">
+          <div className="mt-5 col-12">
             {activetab === "myrecipe" ? (
-              <h1>My recipe</h1>
+              <div className="d-flex flex-md-row flex-column justify-content-center justify-content-md-start flex-wrap">
+                <MyCard img={headerimage} title="Loream Sandwich" />
+                <MyCard img={headerimage} title="Loream Sandwich" />
+              </div>
             ) : activetab === "savedrecipe" ? (
-              <h1>Saved recipe</h1>
+              <div className="d-flex flex-md-row flex-column align-content-center justify-content-center justify-content-md-start flex-wrap">
+                <Card img={headerimage} title="Loream Sandwich" />
+                <Card img={headerimage} title="Loream Sandwich" />
+              </div>
             ) : activetab === "likedrecipe" ? (
-              <h1>Liked recipe</h1>
+              <div className="d-flex flex-md-row flex-column align-content-center justify-content-center justify-content-md-start flex-wrap">
+                <Card img={headerimage} title="Loream Sandwich" />
+                <Card img={headerimage} title="Loream Sandwich" />
+              </div>
             ) : (
               <></>
             )}
