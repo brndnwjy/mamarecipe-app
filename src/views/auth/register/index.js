@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../../redux/action/user.action";
+import swal from "sweetalert"
 import styles from "../auth.module.css";
 
 import Banner from "../../../components/module/auth-banner";
@@ -39,7 +40,11 @@ const Register = () => {
     if (registerForm.password === confirmPassword) {
       dispatch(register(registerForm, navigate))
     } else {
-      alert("Password doesn't match")
+      swal({
+        title: "Invalid",
+        text: `Your password doesn't match`,
+        icon: "error",
+      });
     }
   };
 

@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,15 +9,18 @@ import Card from "../../components/module/card";
 import styles from "./search.module.css";
 
 import searchicon from "../../assets/searchicon.svg";
-import { getAll, searchRecipe } from "../../redux/action/recipe.action";
+import { searchRecipe } from "../../redux/action/recipe.action";
 
 const Search = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { recipe: data, pagination } = useSelector(
+  const { recipe, pagination } = useSelector(
     (state) => state.recipe.recipe
   );
+
+  // const [recipe, setRecipe] = useState([])
+  // const [page, setPage] = useState()
 
   const queryParams = new URLSearchParams(window.location.search);
   const q = queryParams.get("q");
@@ -26,48 +28,31 @@ const Search = () => {
   const [search, setSearch] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      setSearchParams(search);
-      navigate(`/search?q=${search}`);
-    }
-  };
-
-  const handlePagination = async(page) => {
-    try {
-        dispatch(getAll(page))
-    } catch (error) {
-        console.log(error)
-    }
-  }
-
   const handlePage = (page) => {
-    filterRecipe(page)
+    filterRecipe(page);
+    // setPage(parseInt(page))
   };
 
-  //   const searchRecipe = async (key) => {
-  //     const result = await axios.get(
-  //       `${process.env.REACT_APP_API_BACKEND}/recipe?search=${key}`
-  //     );
-  //     setRecipe(result.data.data);
-  //   };
-
-  const filterRecipe = async (page) => {
+  const filterRecipe = (page) => {
     try {
-      let keyword = searchParams.get("q");
+      let search = searchParams.get("q");
       if (searchParams === null) {
-        keyword = "";
+        search = "";
       }
-      dispatch(searchRecipe(keyword, page));
+      dispatch(searchRecipe(search, page));
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    filterRecipe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const handleSearch = async (e) => {
+    if (e.key === "Enter") {
+      await setSearchParams(search);
+      await navigate(`/search?q=${search}`);
+      filterRecipe();
+    }
+  };
+
 
   return (
     <Fragment>
@@ -93,9 +78,9 @@ const Search = () => {
           <h2 className="mt-2 mb-1">Search Result</h2>
           <small className="mb-4">Showing result containing "{q}"</small>
           <div className="d-flex flex-md-row flex-column justify-content-between justify-content-md-start flex-wrap">
-            {data ? (
-              data.length > 0 ? (
-                data.map((item) => (
+            {recipe ? (
+              recipe.length > 0 ? (
+                recipe.map((item) => (
                   <Card
                     img={item.photo}
                     title={item.title}
@@ -112,16 +97,11 @@ const Search = () => {
           </div>
 
           <div className={`${styles["page-container"]}`}>
-            {new Array(pagination.totalPage)
-              .fill()
-              .map((item, index) => (
-                <button
-                  onClick={() => handlePage(index + 1)}
-                  key={index}
-                >
-                  {index + 1}
-                </button>
-              ))}
+            {new Array(pagination.totalPage).fill().map((item, index) => (
+              <button onClick={() => handlePage(index + 1)} key={index}>
+                {index + 1}
+              </button>
+            ))}
           </div>
         </section>
       </main>

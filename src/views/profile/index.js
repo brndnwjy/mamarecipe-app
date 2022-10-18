@@ -22,7 +22,7 @@ const Profile = () => {
   const {user: data} = useSelector((state) => state.user)
   const {myrecipe} = useSelector((state) => state.recipe)
 
-  const [avatar, setAvatar] = useState()
+  const [avatar, setAvatar] = useState('')
   const [activetab, setActivetab] = useState("myrecipe");
 
   const getRecipe = async () => {
@@ -48,7 +48,6 @@ const Profile = () => {
 
   useEffect(() => {
     if(data.user.avatar){
-      console.log(data)
       setAvatar(data.user.avatar)
     }
   }, [data])
@@ -63,7 +62,7 @@ const Profile = () => {
           <div
             className={`d-flex flex-column align-items-center justify-content-center ${styles.account}`}
           >
-            <img src={avatar ? avatar : dummy} alt="avatar" className="col-4" />
+            <img src={avatar ? avatar : dummy} alt="avatar" className={`col-4 ${styles.avatar}`} />
             <button>
               <img src={editicon} alt="edit icon" />
             </button>

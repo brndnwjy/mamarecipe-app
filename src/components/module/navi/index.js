@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import styles from "./navi.module.css";
 
 const Navi = () => {
@@ -37,13 +38,28 @@ const Navi = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setIsLogout(true)
+    swal({
+      title: "Logging Out",
+      text: `Are you sure want to leave?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(async (confirm) => {
+      if (confirm) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setIsLogout(true);
+      }
+    });
   };
 
   useEffect(() => {
     if (isLogout) {
+      swal({
+        title: "Logged Out",
+        text: `You have been logged out`,
+        icon: "success",
+      });
       navigate("/login");
     }
   }, [isLogout, navigate]);

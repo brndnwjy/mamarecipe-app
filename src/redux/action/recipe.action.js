@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert"
 
 export const getAll = (page = 1, order = 'asc') => async (dispatch) => {
   try {
@@ -75,7 +76,12 @@ export const updateRecipe = (formData, token, id, navigate) => async(dispatch) =
         Authorization : `Bearer ${token}`
       }
     })
-    console.log(result.data.message)
+    swal({
+      title: "Updated!",
+      text: `${result.data.message}`,
+      icon: "success"
+  });
+
     dispatch({type: "UPDATE_RECIPE_SUCCESS"})
     navigate("/profile")
   } catch (error) {

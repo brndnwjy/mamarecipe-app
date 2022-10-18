@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import swal from "sweetalert";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../views/auth/login";
 import Register from "../views/auth/register";
 import Forgot from "../views/auth/forgotpassword";
@@ -13,6 +14,19 @@ import Home from "../views/home";
 import Search from "../views/search";
 import Profile from "../views/profile";
 
+const Auth = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    swal({
+      title: "Denied!",
+      text: `Access Denied, Please Login!`,
+      icon: "error",
+  });  
+    return <Navigate to="/login" replace />;
+  } 
+    return children;
+};
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -23,14 +37,14 @@ const Router = () => {
         <Route path="/codeverification" element={<Verify />} />
         <Route path="/resetpassword" element={<Reset />} />
 
-        <Route path="/insert" element={<Insert />} />
-        <Route path="/:id" element={<Detail />} />
-        <Route path="/edit/:id" element={<Edit />} />
-        <Route path="/detailvideo" element={<DetailVideo />} />
+        <Route path="/insert" element={<Auth><Insert /></Auth>} />
+        <Route path="/:id" element={<Auth><Detail /></Auth>} />
+        <Route path="/edit/:id" element={<Auth><Edit /></Auth>} />
+        <Route path="/detailvideo" element={<Auth><DetailVideo /></Auth>} />
 
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Auth><Profile /></Auth>} />
       </Routes>
     </BrowserRouter>
   );

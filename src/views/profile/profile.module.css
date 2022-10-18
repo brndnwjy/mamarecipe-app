@@ -10,6 +10,11 @@
   border: none;
 }
 
+.avatar {
+  max-height: 650px;
+  max-width: 650px;
+}
+
 .hl {
   position: absolute;
   left: 0;
