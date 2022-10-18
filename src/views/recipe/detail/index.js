@@ -8,35 +8,36 @@ import styles from "./detail.module.css";
 import playicon from "../../../assets/playicon.svg";
 import Ayudia from "../../../assets/ayudia.png";
 import { useParams } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 const Detail = () => {
-  const {id} = useParams()
+  const { id } = useParams();
 
-  const [detail, setDetail] = useState()
-  const [title, setTitle] = useState()
-  const [photo, setPhoto] = useState()
-  const [ingredient, setIngredient] = useState()
+  const [detail, setDetail] = useState();
+  const [title, setTitle] = useState();
+  const [photo, setPhoto] = useState();
+  const [ingredient, setIngredient] = useState();
 
-
-  const getDetail = async() => {
-    const result = await axios.get(`http://localhost:4000/v1/recipe/${id}`)
-    setDetail(result.data.data[0])
+  const getDetail = async () => {
+    const result = await axios.get(
+      `${process.env.REACT_APP_API_BACKEND}/recipe/${id}`
+    );
+    setDetail(result.data.data[0]);
     // console.log(result.data.data[0])
-  }
+  };
 
   useEffect(() => {
-    getDetail()
-    // console.log(detail)
-  }, [])
+    getDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    if(detail){
-      setTitle(detail.title)
-      setPhoto(detail.photo)
-      setIngredient((detail.ingredient).split(","))
+    if (detail) {
+      setTitle(detail.title);
+      setPhoto(detail.photo);
+      setIngredient(detail.ingredient.split(","));
     }
-  }, [detail])
+  }, [detail]);
 
   return (
     <Fragment>
@@ -53,11 +54,7 @@ const Detail = () => {
           className={`mb-4 d-flex flex-column align-items-start ${styles.ingredient}`}
         >
           <h2>Ingredients</h2>
-          <ul>
-            {ingredient ? ingredient.map((item) => (
-              <li>{item}</li>
-            )) : ""}
-          </ul>
+          <ul>{ingredient ? ingredient.map((item) => <li>{item}</li>) : ""}</ul>
         </section>
 
         <section
@@ -87,10 +84,7 @@ const Detail = () => {
               placeholder="Comment :"
               className={`mb-4 ${styles.textarea}`}
             />
-            <Button
-              title="Send"
-              classname={`my-2 ${styles["comment-btn"]}`}
-            />
+            <Button title="Send" classname={`my-2 ${styles["comment-btn"]}`} />
           </form>
 
           <h2>Comments</h2>

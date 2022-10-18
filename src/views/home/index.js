@@ -15,7 +15,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { recipe } = useSelector((state) => state.recipe);
+  const { recipe } = useSelector((state) => state.recipe.recipe);
 
   const getRecipe = async () => {
     try {
@@ -27,9 +27,16 @@ const Home = () => {
 
   useEffect(() => {
     getRecipe();
-    console.log("ini home");
-    console.log(recipe);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [search, setSearch] = useState()
+
+  const handleSearch = (e) => {
+    if(e.key === "Enter"){
+      navigate(`/search?q=${search}`)
+    }
+  }
 
   return (
     <Fragment>
@@ -42,7 +49,7 @@ const Home = () => {
               className={`d-flex align-items-center col-8 ${styles.searchbar}`}
             >
               <img src={searchicon} alt="" />
-              <input name="search" type="text" placeholder="Search Recipe" />
+              <input name="search" type="text" placeholder="Search Recipe" onChange={(e) => setSearch(e.target.value)}  onKeyDown={handleSearch}/>
             </div>
           </div>
 

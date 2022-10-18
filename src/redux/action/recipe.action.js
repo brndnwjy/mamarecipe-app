@@ -1,15 +1,33 @@
 import axios from "axios";
 
-export const getAll = () => async (dispatch) => {
+export const getAll = (page = 1, order = 'asc') => async (dispatch) => {
   try {
     dispatch({ type: "GET_ALL_PENDING" });
     const result = await axios.get(
-      `${process.env.REACT_APP_API_BACKEND}/recipe`
+      `${process.env.REACT_APP_API_BACKEND}/recipe?page=${page}&order=${order}`
     );
     const recipe = result.data.data;
+    const pagination = result.data.pagination
     console.log("ini recipe")
     console.log(recipe);
-    dispatch({ type: "GET_ALL_SUCCESS", payload: recipe });
+    dispatch({ type: "GET_ALL_SUCCESS", payload: {recipe, pagination} });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "GET_ALL_ERROR" });
+  }
+};
+
+export const searchRecipe = (search = "", page = 1) => async (dispatch) => {
+  try {
+    dispatch({ type: "GET_ALL_PENDING" });
+    const result = await axios.get(
+      `${process.env.REACT_APP_API_BACKEND}/recipe?search=${search}&page=${page}`
+    );
+    const recipe = result.data.data;
+    const pagination = result.data.pagination
+    console.log("ini recipe")
+    console.log(recipe);
+    dispatch({ type: "GET_ALL_SUCCESS", payload: {recipe, pagination} });
   } catch (error) {
     console.log(error);
     dispatch({ type: "GET_ALL_ERROR" });

@@ -10,6 +10,7 @@ import Edit from "../views/recipe/edit";
 import Detail from "../views/recipe/detail";
 import DetailVideo from "../views/recipe/detailvideo";
 import Home from "../views/home";
+import Search from "../views/search";
 import Profile from "../views/profile";
 
 const Router = () => {
@@ -24,10 +25,11 @@ const Router = () => {
 
         <Route path="/insert" element={<Insert />} />
         <Route path="/:id" element={<Detail />} />
-        <Route path="edit/:id" element={<Edit />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="/detailvideo" element={<DetailVideo />} />
 
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
