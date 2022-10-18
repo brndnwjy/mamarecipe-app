@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Navi from "../../components/module/navi";
 import Footer from "../../components/module/footer";
 import Card from "../../components/module/card";
@@ -7,14 +7,51 @@ import Button from "../../components/base/button";
 
 import styles from "./profile.module.css";
 
-import avatar from "../../assets/avatar.jpeg";
+import dummy from "../../assets/avatar.jpeg";
 import editicon from "../../assets/editicon.svg";
 import headerimage from "../../assets/headerimage.png";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteRecipe, getMyRecipe } from "../../redux/action/recipe.action";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const localToken = localStorage.getItem("token")
+  const {user: data} = useSelector((state) => state.user)
+  const {myrecipe} = useSelector((state) => state.recipe)
+
+  const [avatar, setAvatar] = useState()
   const [activetab, setActivetab] = useState("myrecipe");
 
-  console.log(activetab);
+  const getRecipe = async () => {
+    try {
+      dispatch(getMyRecipe(localToken));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeRecipe = async(recipe_id) => {
+    try {
+      dispatch(deleteRecipe(localToken, recipe_id, navigate))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getRecipe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if(data.user.avatar){
+      console.log(data)
+      setAvatar(data.user.avatar)
+    }
+  }, [data])
 
   return (
     <Fragment>
@@ -26,12 +63,12 @@ const Profile = () => {
           <div
             className={`d-flex flex-column align-items-center justify-content-center ${styles.account}`}
           >
-            <img src={avatar} alt="avatar" className="col-4" />
+            <img src={avatar ? avatar : dummy} alt="avatar" className="col-4" />
             <button>
               <img src={editicon} alt="edit icon" />
             </button>
           </div>
-          <h2>Brandon Wijaya</h2>
+          <h2>{data ? data.user.name : ""}</h2>
         </section>
 
         <section className="container mt-5 d-flex flex-column align-items-start justify-content-center">
@@ -60,8 +97,9 @@ const Profile = () => {
           <div className="mt-5 col-12">
             {activetab === "myrecipe" ? (
               <div className="d-flex flex-md-row flex-column justify-content-center justify-content-md-start flex-wrap">
-                <MyCard img={headerimage} title="Loream Sandwich" />
-                <MyCard img={headerimage} title="Loream Sandwich" />
+                {myrecipe ? myrecipe.map((item) => (
+                  <MyCard img={item.photo} title={item.title} onedit={() => navigate(`/edit/${item.recipe_id}`)} ondelete={() => removeRecipe(item.recipe_id)}/>
+                )) : ""}
               </div>
             ) : activetab === "savedrecipe" ? (
               <div className="d-flex flex-md-row flex-column align-content-center justify-content-center justify-content-md-start flex-wrap">

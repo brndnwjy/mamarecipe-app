@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 // import { Helmet } from "react-helmet";
-import styles from "./insert.module.css";
+import styles from "./edit.module.css";
 
 import Navi from "../../../components/module/navi";
 import Footer from "../../../components/module/footer";
@@ -11,26 +10,42 @@ import FileInput from "../../../components/base/fileinput";
 import Button from "../../../components/base/button";
 
 import imageicon from "../../../assets/imageicon.svg";
-import { addRecipe } from "../../../redux/action/recipe.action";
+import { updateRecipe } from "../../../redux/action/recipe.action";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const Insert = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
   const localToken = localStorage.getItem("token");
 
-  const [recipeForm, setRecipeForm] = useState({
-    title: "",
-    ingredient: "",
-  });
+  const [detail, setDetail] = useState();
+
+  const [updateForm, setUpdateForm] = useState();
 
   const [photo, setPhoto] = useState();
   const [preview, setPreview] = useState();
 
+  const getDetail = async () => {
+    const result = await axios.get(`http://localhost:4000/v1/recipe/${id}`);
+    setDetail(result.data.data[0]);
+    if (result.data.data[0].photo) {
+      setPreview(result.data.data[0].photo);
+    }
+  };
+
+  useEffect(() => {
+    getDetail();
+    // console.log(detail)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleInput = (e) => {
-    setRecipeForm({
-      ...recipeForm,
+    setUpdateForm({
+      ...updateForm,
       [e.target.name]: e.target.value,
     });
   };
@@ -44,23 +59,19 @@ const Insert = () => {
     e.preventDefault();
 
     let formData = new FormData();
-    formData.append("title", recipeForm.title);
-    formData.append("ingredient", recipeForm.ingredient);
-    formData.append("photo", photo);
+    if (updateForm.title) {
+      formData.append("title", updateForm.title);
+    }
 
-    dispatch(addRecipe(formData, localToken, navigate))
-    // axios.post("http://localhost:4000/v1/recipe/", formData, {
-    //   headers: {
-    //     Authorization : `Bearer ${localToken}`
-    //   }
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     return navigate("/insert");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    if (updateForm.ingredient) {
+      formData.append("ingredient", updateForm.ingredient);
+    }
+
+    if (photo) {
+      formData.append("photo", photo);
+    }
+
+    dispatch(updateRecipe(formData, localToken, id, navigate));
   };
   return (
     <Fragment>
@@ -81,13 +92,13 @@ const Insert = () => {
         <Input
           name="title"
           type="text"
-          placeholder="Title"
+          placeholder={detail ? detail.title : "Title"}
           onchange={handleInput}
           classname={`w-100 my-4 ${styles.input}`}
         />
         <textarea
           name="ingredient"
-          placeholder="Ingredient"
+          placeholder={detail ? detail.ingredient : "Ingredient"}
           onChange={handleInput}
           className={`mb-4 ${styles.textarea}`}
         />

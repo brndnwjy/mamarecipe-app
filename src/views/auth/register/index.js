@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../../redux/action/user.action";
 import styles from "../auth.module.css";
 
 import Banner from "../../../components/module/auth-banner";
 import Input from "../../../components/base/input";
 import Button from "../../../components/base/button";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [registerForm, setRegisterForm] = useState({
@@ -35,15 +37,7 @@ const Register = () => {
     e.preventDefault();
 
     if (registerForm.password === confirmPassword) {
-      axios
-        .post("http://localhost:4000/v1/user/register", registerForm)
-        .then((response) => {
-          console.log(response);
-          return navigate('/login')
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(register(registerForm, navigate))
     } else {
       alert("Password doesn't match")
     }

@@ -9,9 +9,13 @@
 }
 
 .card img {
+    object-fit: cover;
+    aspect-ratio: 1;
     width: 350px;
+    height: 350px;
     border: 0;
     border-radius: 8px;
+    margin: 0;
 }
 
 .card span {

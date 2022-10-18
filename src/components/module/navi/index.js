@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./navi.module.css";
 
 const Navi = () => {
+  const navigate = useNavigate();
+
+  const { user: data } = useSelector((state) => state.user);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isLogout, setIsLogout] = useState(false);
+
+  useEffect(() => {
+    if (data.token) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [data.token]);
+
   const [background, setBackground] = useState(false);
   const [font, setFont] = useState(false);
-  
+
   const changeNavi = () => {
     if (window.scrollY >= 75) {
       setBackground(true);
@@ -21,6 +36,18 @@ const Navi = () => {
     window.addEventListener("scroll", changeNavi);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLogout(true)
+  };
+
+  useEffect(() => {
+    if (isLogout) {
+      navigate("/login");
+    }
+  }, [isLogout, navigate]);
+
   return (
     <nav
       className={
@@ -31,7 +58,6 @@ const Navi = () => {
       //   className={`mb-5 sticky-top navbar navbar-expand-md navbar-light ${styles.navi}`}
     >
       <p className={`navbar-brand ${styles.appliname}`}>Mamarecipe</p>
-
 
       <button
         className={`navbar-toggler ${styles.toggler}`}
@@ -81,17 +107,38 @@ const Navi = () => {
           </div>
 
           <li>
-            <NavLink
-              to="/login"
-              className={font? (isActive) =>
-                `nav-link ${styles["login-link"]} ${styles.font}` +
-                (!isActive ? "unselected" : "") : (isActive) =>
-                `nav-link ${styles["login-link"]}` +
-                (!isActive ? "unselected" : "")
-              }
-            >
-              Login
-            </NavLink>
+            {isLogin ? (
+              <NavLink
+                to="#"
+                className={
+                  font
+                    ? (isActive) =>
+                        `nav-link ${styles["login-link"]} ${styles.font}` +
+                        (!isActive ? "unselected" : "")
+                    : (isActive) =>
+                        `nav-link ${styles["login-link"]}` +
+                        (!isActive ? "unselected" : "")
+                }
+                onClick={handleLogout}
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/login"
+                className={
+                  font
+                    ? (isActive) =>
+                        `nav-link ${styles["login-link"]} ${styles.font}` +
+                        (!isActive ? "unselected" : "")
+                    : (isActive) =>
+                        `nav-link ${styles["login-link"]}` +
+                        (!isActive ? "unselected" : "")
+                }
+              >
+                Login
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>

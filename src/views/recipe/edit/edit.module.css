@@ -1,0 +1,51 @@
+.wrapper {
+    height: max-content;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+  }
+  
+  .file-input {
+    height: 400px;
+    background-color: #f6f5f4;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .input input,
+  .input input:focus {
+    width: 100%;
+    height: 50px;
+    background-color: #f6f5f4;
+    padding-left: 15px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+  
+  .textarea,
+  .textarea:focus {
+    width: 100%;
+    height: 300px;
+    background-color: #f6f5f4;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    resize: none;
+  }
+  
+  .button,
+  .button:focus {
+    height: 50px;
+    background-color: #efc81a;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+  }
+  

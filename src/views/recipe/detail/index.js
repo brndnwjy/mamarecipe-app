@@ -1,15 +1,43 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Navi from "../../../components/module/navi";
 import Footer from "../../../components/module/footer";
 import Button from "../../../components/base/button";
 
 import styles from "./detail.module.css";
 
-import Loream from "../../../assets/loream.jpg";
 import playicon from "../../../assets/playicon.svg";
 import Ayudia from "../../../assets/ayudia.png";
+import { useParams } from "react-router-dom";
+import axios from "axios"
 
 const Detail = () => {
+  const {id} = useParams()
+
+  const [detail, setDetail] = useState()
+  const [title, setTitle] = useState()
+  const [photo, setPhoto] = useState()
+  const [ingredient, setIngredient] = useState()
+
+
+  const getDetail = async() => {
+    const result = await axios.get(`http://localhost:4000/v1/recipe/${id}`)
+    setDetail(result.data.data[0])
+    // console.log(result.data.data[0])
+  }
+
+  useEffect(() => {
+    getDetail()
+    // console.log(detail)
+  }, [])
+
+  useEffect(() => {
+    if(detail){
+      setTitle(detail.title)
+      setPhoto(detail.photo)
+      setIngredient((detail.ingredient).split(","))
+    }
+  }, [detail])
+
   return (
     <Fragment>
       <Navi />
@@ -17,8 +45,8 @@ const Detail = () => {
         <section
           className={`mb-4 d-flex flex-column align-items-center ${styles.recipe}`}
         >
-          <h1>Loream Sandwich</h1>
-          <img src={Loream} alt="Loream sandwich" className={`mb-4 col-8`} />
+          <h1>{title}</h1>
+          <img src={photo} alt="Loream sandwich" className={`mb-4 col-8`} />
         </section>
 
         <section
@@ -26,11 +54,9 @@ const Detail = () => {
         >
           <h2>Ingredients</h2>
           <ul>
-            <li>2 Eggs</li>
-            <li>2 Tbsp Mayonnaise</li>
-            <li>3 Slices of Bread</li>
-            <li>A little Butter</li>
-            <li> A slice of Ham or Cheese</li>
+            {ingredient ? ingredient.map((item) => (
+              <li>{item}</li>
+            )) : ""}
           </ul>
         </section>
 

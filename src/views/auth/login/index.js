@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../../redux/action/user.action";
 import styles from "../auth.module.css";
 
 import Banner from "../../../components/module/auth-banner";
@@ -9,6 +10,7 @@ import Input from "../../../components/base/input";
 import Button from "../../../components/base/button";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
@@ -26,17 +28,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:4000/v1/user/login", loginForm)
-      .then((response) => {
-        console.log(response);
-        localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.data.user));
-        return navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(login(loginForm, navigate));
   };
 
   return (
