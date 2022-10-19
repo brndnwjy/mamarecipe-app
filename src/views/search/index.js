@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navi from "../../components/module/navi";
 import Footer from "../../components/module/footer";

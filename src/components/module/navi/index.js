@@ -17,7 +17,7 @@ const Navi = () => {
     } else {
       setIsLogin(false);
     }
-  }, [data.token]);
+  }, [data]);
 
   const [background, setBackground] = useState(false);
   const [font, setFont] = useState(false);
@@ -48,6 +48,7 @@ const Navi = () => {
       if (confirm) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        localStorage.removeItem("persist:data")
         setIsLogout(true);
       }
     });

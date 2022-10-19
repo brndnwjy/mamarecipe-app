@@ -4,10 +4,10 @@ import Button from "../../base/button";
 
 import styles from "./mycard.module.css";
 
-const MyCard = ({ img, title, style, onedit, ondelete }) => {
+const MyCard = ({ img, title, style, onrecipe, onedit, ondelete }) => {
   return (
     <div className={`d-flex flex-column align-items-center ${styles.mycard}`} style={style}>
-      <div className={`d-flex flex-column align-items-center ${styles['mycard-img']}`}>
+      <div onClick={onrecipe} className={`d-flex flex-column align-items-center ${styles['mycard-img']}`}>
         <img src={img} alt={title} />
         <span>{title}</span>
       </div>

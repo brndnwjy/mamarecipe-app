@@ -6,7 +6,7 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
 const persistConfig = {
-    key: 'root',
+    key: 'data',
     storage,
   }
    
@@ -14,7 +14,5 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = createStore(persistedReducer, applyMiddleware(logger, thunk))
 const persistor = persistStore(store)
 
-export const reduxConfig = {
-    store,
-    persistor
-}
+export default store
+export {persistor}

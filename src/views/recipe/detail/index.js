@@ -14,6 +14,7 @@ const Detail = () => {
   const { id } = useParams();
 
   const [detail, setDetail] = useState();
+  const [owner, setOwner] = useState();
   const [title, setTitle] = useState();
   const [photo, setPhoto] = useState();
   const [ingredient, setIngredient] = useState();
@@ -23,7 +24,6 @@ const Detail = () => {
       `${process.env.REACT_APP_API_BACKEND}/recipe/${id}`
     );
     setDetail(result.data.data[0]);
-    // console.log(result.data.data[0])
   };
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const Detail = () => {
   useEffect(() => {
     if (detail) {
       setTitle(detail.title);
+      setOwner(detail.recipe_owner);
       setPhoto(detail.photo);
       setIngredient(detail.ingredient.split(","));
     }
@@ -47,7 +48,8 @@ const Detail = () => {
           className={`mb-4 d-flex flex-column align-items-center ${styles.recipe}`}
         >
           <h1>{title}</h1>
-          <img src={photo} alt="Loream sandwich" className={`mb-4 col-8`} />
+          <img src={photo} alt="Loream sandwich" className={`mb-3 col-8`} />
+          <h4 className="mb-3">Recipe owner : {owner}</h4>
         </section>
 
         <section

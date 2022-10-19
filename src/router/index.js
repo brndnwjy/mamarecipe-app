@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import swal from "sweetalert";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Login from "../views/auth/login";
 import Register from "../views/auth/register";
 import Forgot from "../views/auth/forgotpassword";
@@ -13,6 +13,16 @@ import DetailVideo from "../views/recipe/detailvideo";
 import Home from "../views/home";
 import Search from "../views/search";
 import Profile from "../views/profile";
+
+const ScrollToTop = ({children}) => {
+  const {pathname} = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return children
+}
 
 const Auth = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -30,6 +40,7 @@ const Auth = ({ children }) => {
 const Router = () => {
   return (
     <BrowserRouter>
+    <ScrollToTop>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -46,6 +57,7 @@ const Router = () => {
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Auth><Profile /></Auth>} />
       </Routes>
+      </ScrollToTop>
     </BrowserRouter>
   );
 };

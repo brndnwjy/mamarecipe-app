@@ -5,6 +5,13 @@
   margin-bottom: 30px;
 }
 
+.recipe img {
+  width: 100%;
+  max-width: 500px;
+  border: none;
+  border-radius: 16px;
+}
+
 .ingredient h2,
 .video h2,
 .commentary h2 {

@@ -97,7 +97,7 @@ const Profile = () => {
             {activetab === "myrecipe" ? (
               <div className="d-flex flex-md-row flex-column justify-content-center justify-content-md-start flex-wrap">
                 {myrecipe ? myrecipe.map((item) => (
-                  <MyCard img={item.photo} title={item.title} onedit={() => navigate(`/edit/${item.recipe_id}`)} ondelete={() => removeRecipe(item.recipe_id)}/>
+                  <MyCard img={item.photo} title={item.title} onrecipe={() => navigate(`/${item.recipe_id}`)} onedit={() => navigate(`/edit/${item.recipe_id}`)} ondelete={() => removeRecipe(item.recipe_id)}/>
                 )) : ""}
               </div>
             ) : activetab === "savedrecipe" ? (
