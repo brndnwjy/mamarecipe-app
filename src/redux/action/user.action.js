@@ -1,5 +1,5 @@
 import axios from "axios";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
 export const login = (dataForm, navigate) => async (dispatch) => {
   try {

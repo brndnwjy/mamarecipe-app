@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,41 +17,39 @@ const Search = () => {
 
   const { recipe, pagination } = useSelector(
     (state) => state.recipe.recipe
-  );
+    );
+    
+    const queryParams = new URLSearchParams(window.location.search);
+    const q = queryParams.get("q");
+    
+    const [currentPage, setCurrentPage] = useState(1)
+    const [search, setSearch] = useState();
 
-  // const [recipe, setRecipe] = useState([])
-  // const [page, setPage] = useState()
-
-  const queryParams = new URLSearchParams(window.location.search);
-  const q = queryParams.get("q");
-
-  const [search, setSearch] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const handlePage = (page) => {
-    filterRecipe(page);
-    // setPage(parseInt(page))
+  const handleSearch = async (e) => {
+    if (e.key === "Enter") {
+      await navigate(`/search?q=${search}`);
+      setCurrentPage(1)
+      filterRecipe(search, currentPage);
+    }
   };
 
-  const filterRecipe = (page) => {
+  const handlePage = (page) => {
+    setCurrentPage(page);
+    filterRecipe(search, page)
+  };
+
+  const filterRecipe = (key, page) => {
     try {
-      let search = searchParams.get("q");
-      if (searchParams === null) {
-        search = "";
-      }
-      dispatch(searchRecipe(search, page));
+      dispatch(searchRecipe(key, page));
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSearch = async (e) => {
-    if (e.key === "Enter") {
-      await setSearchParams(search);
-      await navigate(`/search?q=${search}`);
-      filterRecipe();
-    }
-  };
+  useEffect(() => {
+    filterRecipe()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
 
   return (

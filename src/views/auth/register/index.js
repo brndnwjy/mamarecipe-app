@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../../redux/action/user.action";
-import swal from "sweetalert"
+import swal from "sweetalert";
 import styles from "../auth.module.css";
 
 import Banner from "../../../components/module/auth-banner";
@@ -11,8 +11,8 @@ import Button from "../../../components/base/button";
 import { useDispatch } from "react-redux";
 
 const Register = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [registerForm, setRegisterForm] = useState({
     name: "",
@@ -38,7 +38,7 @@ const Register = () => {
     e.preventDefault();
 
     if (registerForm.password === confirmPassword) {
-      dispatch(register(registerForm, navigate))
+      dispatch(register(registerForm, navigate));
     } else {
       swal({
         title: "Invalid",
@@ -65,7 +65,10 @@ const Register = () => {
             Create new account to access all features
           </p>
           <div className={styles.hl} />
-          <form onSubmit={handleSubmit} className={`d-flex flex-column ${styles.form}`}>
+          <form
+            onSubmit={handleSubmit}
+            className={`d-flex flex-column ${styles.form}`}
+          >
             <Input
               label="Name"
               id="name"
@@ -112,7 +115,7 @@ const Register = () => {
               classname={`mt-2 mb-3 ${styles.input}`}
             />
             <div className={`d-flex align-items-center ${styles.tnc}`}>
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <span>I agree to terms & conditions</span>
             </div>
             <Button

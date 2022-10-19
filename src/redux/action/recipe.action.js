@@ -9,8 +9,6 @@ export const getAll = (page = 1, order = 'asc') => async (dispatch) => {
     );
     const recipe = result.data.data;
     const pagination = result.data.pagination
-    console.log("ini recipe")
-    console.log(recipe);
     dispatch({ type: "GET_ALL_SUCCESS", payload: {recipe, pagination} });
   } catch (error) {
     console.log(error);
@@ -28,6 +26,8 @@ export const searchRecipe = (search = "", page = 1) => async (dispatch) => {
     const pagination = result.data.pagination
     console.log("ini recipe")
     console.log(recipe);
+    console.log("ini pagination")
+    console.log(pagination);
     dispatch({ type: "GET_ALL_SUCCESS", payload: {recipe, pagination} });
   } catch (error) {
     console.log(error);
