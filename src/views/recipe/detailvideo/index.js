@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Navi from "../../../components/module/navi";
+import Navi from "../../../components/module/navi/logged";
 import Footer from "../../../components/module/footer";
 
 import Step1 from "../../../assets/step1.jpg";

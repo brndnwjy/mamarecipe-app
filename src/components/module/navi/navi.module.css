@@ -10,11 +10,6 @@
   transition: 0.5s;
 }
 
-.font {
-  color: #2e266f !important;
-  transition: ease-in-out 0.5s;
-}
-
 .appliname {
   display: none;
   color: #2e266f;
@@ -29,9 +24,9 @@
 .navlink,
 .navlink:focus {
   text-decoration: none;
-  color: #2e266f;
-  font-size: 18px;
-  font-weight: 500;
+  color: #2e266f !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
   margin-right: 25px;
   outline: none;
 }
@@ -39,9 +34,9 @@
 .login-link,
 .login-link:focus {
   text-decoration: none;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 500;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
   outline: none;
   transition: 0.5s;
 }
@@ -56,6 +51,11 @@
   color: #ffffff;
 }
 
+.font {
+  color: #2e266f !important;
+  transition: ease-in-out 0.5s;
+}
+
 @media only screen and (max-width: 600px) {
   .appliname {
     display: block;
@@ -68,6 +68,6 @@
   }
 
   .login-link {
-    color: #2e266f;
+  color: #2e266f !important;
   }
 }

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Navi from "../../../components/module/navi";
+import Navi from "../../../components/module/navi/logged";
 import Footer from "../../../components/module/footer";
 import Button from "../../../components/base/button";
 
@@ -7,10 +7,12 @@ import styles from "./detail.module.css";
 
 import playicon from "../../../assets/playicon.svg";
 import Ayudia from "../../../assets/ayudia.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Detail = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const [detail, setDetail] = useState();
@@ -18,6 +20,7 @@ const Detail = () => {
   const [title, setTitle] = useState();
   const [photo, setPhoto] = useState();
   const [ingredient, setIngredient] = useState();
+  const [date, setDate] = useState();
 
   const getDetail = async () => {
     const result = await axios.get(
@@ -37,6 +40,7 @@ const Detail = () => {
       setOwner(detail.recipe_owner);
       setPhoto(detail.photo);
       setIngredient(detail.ingredient.split(","));
+      setDate(detail.created_at);
     }
   }, [detail]);
 
@@ -49,7 +53,15 @@ const Detail = () => {
         >
           <h1>{title}</h1>
           <img src={photo} alt="Loream sandwich" className={`mb-3 col-8`} />
-          <h4 className="mb-3">Recipe owner : {owner}</h4>
+          <h4 className="mb-1">Recipe owner : {owner}</h4>
+          <small className="mb-3">
+            Uploaded at :{" "}
+            {`${new Date(date).getDate()} - ${
+              new Date(date).getMonth() < 10
+                ? "0" + new Date(date).getMonth()
+                : new Date(date).getMonth()
+            } - ${new Date(date).getFullYear()}`}
+          </small>
         </section>
 
         <section
@@ -66,6 +78,7 @@ const Detail = () => {
           <Button
             title={<img src={playicon} alt="play icon" />}
             classname={`mb-4 ${styles["video-btn"]}`}
+            onclick={() => navigate("/detailvideo")}
           />
           <Button
             title={<img src={playicon} alt="play icon" />}

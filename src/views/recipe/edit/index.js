@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 // import { Helmet } from "react-helmet";
 import styles from "./edit.module.css";
 
-import Navi from "../../../components/module/navi";
+import Navi from "../../../components/module/navi/logged";
 import Footer from "../../../components/module/footer";
 import Input from "../../../components/base/input";
 import FileInput from "../../../components/base/fileinput";
@@ -24,7 +24,7 @@ const Insert = () => {
 
   const [detail, setDetail] = useState();
 
-  const [updateForm, setUpdateForm] = useState();
+  const [updateForm, setUpdateForm] = useState({});
 
   const [photo, setPhoto] = useState();
   const [preview, setPreview] = useState();

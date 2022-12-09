@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import styles from "./navi.module.css";
 
-const Navi = () => {
+const NaviLogged = () => {
+  const navigate = useNavigate();
+
+  const [isLogout, setIsLogout] = useState(false);
+
   const [background, setBackground] = useState(false);
   const [font, setFont] = useState(false);
 
@@ -20,6 +25,34 @@ const Navi = () => {
     changeNavi();
     window.addEventListener("scroll", changeNavi);
   }, []);
+
+  const handleLogout = () => {
+    swal({
+      title: "Logging Out",
+      text: `Are you sure want to leave?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(async (confirm) => {
+      if (confirm) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("persist:data");
+        setIsLogout(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isLogout) {
+      swal({
+        title: "Logged Out",
+        text: `You have been logged out`,
+        icon: "success",
+      });
+      navigate("/login");
+    }
+  }, [isLogout, navigate]);
 
   return (
     <nav
@@ -48,17 +81,30 @@ const Navi = () => {
         <ul className="w-100 container navbar-nav text-center d-flex justify-content-between">
           <div className="d-flex flex-column flex-md-row">
             <li>
-              <NavLink to="/" className={`nav-link ${styles.navlink}`}>
+              <NavLink
+                to="/"
+                className={(isActive) => `nav-link ${styles.navlink}`}
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/insert" className={`nav-link ${styles.navlink}`}>
+              <NavLink
+                to="/insert"
+                className={(isActive) =>
+                  `nav-link ${styles.navlink}` + (!isActive ? "unselected" : "")
+                }
+              >
                 Add Recipe
               </NavLink>
             </li>
             <li>
-              <NavLink to="/profile" className={`nav-link ${styles.navlink}`}>
+              <NavLink
+                to="/profile"
+                className={(isActive) =>
+                  `nav-link ${styles.navlink}` + (!isActive ? "unselected" : "")
+                }
+              >
                 Profile
               </NavLink>
             </li>
@@ -66,14 +112,19 @@ const Navi = () => {
 
           <li>
             <NavLink
-              to="/login"
+              to="#"
               className={
                 font
-                  ? `nav-link ${styles["login-link"]} ${styles.font}`
-                  : `nav-link ${styles["login-link"]}`
+                  ? (isActive) =>
+                      `nav-link ${styles["login-link"]} ${styles.font}` +
+                      (!isActive ? "unselected" : "")
+                  : (isActive) =>
+                      `nav-link ${styles["login-link"]}` +
+                      (!isActive ? "unselected" : "")
               }
+              onClick={handleLogout}
             >
-              Login
+              Logout
             </NavLink>
           </li>
         </ul>
@@ -82,4 +133,4 @@ const Navi = () => {
   );
 };
 
-export default Navi;
+export default NaviLogged;

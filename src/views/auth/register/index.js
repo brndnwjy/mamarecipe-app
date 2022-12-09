@@ -23,6 +23,8 @@ const Register = () => {
 
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [tnc, setTnc] = useState(false);
+
   const handleInput = (e) => {
     setRegisterForm({
       ...registerForm,
@@ -36,6 +38,14 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!tnc) {
+      return swal({
+        title: "Invalid",
+        text: `Please check the box before registering new account`,
+        icon: "error",
+      });
+    }
 
     if (registerForm.password === confirmPassword) {
       dispatch(register(registerForm, navigate));
@@ -76,6 +86,7 @@ const Register = () => {
               type="text"
               placeholder="Name"
               onchange={handleInput}
+              value={registerForm.name}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -85,6 +96,7 @@ const Register = () => {
               type="email"
               placeholder="examplexxx@gmail.com"
               onchange={handleInput}
+              value={registerForm.email}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -94,6 +106,7 @@ const Register = () => {
               type="tel"
               placeholder="08xxxxxxxxxx"
               onchange={handleInput}
+              value={registerForm.phone}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -103,6 +116,7 @@ const Register = () => {
               type="password"
               placeholder="Create New Password"
               onchange={handleInput}
+              value={registerForm.password}
               classname={`mt-2 mb-3 ${styles.input}`}
             />
             <Input
@@ -112,10 +126,11 @@ const Register = () => {
               type="password"
               placeholder="Confirm Your Password"
               onchange={passwordValidate}
+              value={confirmPassword}
               classname={`mt-2 mb-3 ${styles.input}`}
             />
             <div className={`d-flex align-items-center ${styles.tnc}`}>
-              <input type="checkbox" />
+              <input type="checkbox" onClick={() => setTnc(true)} />
               <span>I agree to terms & conditions</span>
             </div>
             <Button

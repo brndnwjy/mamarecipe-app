@@ -19,12 +19,12 @@ export const getAll =
   };
 
 export const searchRecipe =
-  (search = "", page = 1) =>
+  (search = "", page = 1, sort) =>
   async (dispatch) => {
     try {
       dispatch({ type: "GET_ALL_PENDING" });
       const result = await axios.get(
-        `${process.env.REACT_APP_API_BACKEND}/recipe?search=${search}&page=${page}`
+        `${process.env.REACT_APP_API_BACKEND}/recipe?search=${search}&page=${page}&sortby=${sort}`
       );
       const recipe = result.data.data;
       const pagination = result.data.pagination;

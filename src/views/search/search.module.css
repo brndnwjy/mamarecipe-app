@@ -42,3 +42,13 @@
   color: #ffffff;
   outline: none;
 }
+
+.sort {
+  width: 100px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .searchbar{
+    margin-top: 0;
+  }
+}

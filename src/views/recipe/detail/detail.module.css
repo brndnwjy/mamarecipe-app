@@ -1,5 +1,5 @@
 .recipe h1 {
-  color: #2E266F;
+  color: #2e266f;
   font-size: 60px;
   font-weight: 500;
   margin-bottom: 30px;
@@ -36,14 +36,14 @@
 .video-btn:focus {
   height: 50px;
   width: 20%;
-  background-color: #EFC81A; 
+  background-color: #efc81a;
   border: none;
   border-radius: 8px;
   outline: none;
 }
 
 .comment-field {
-  margin-bottom: 50px;  
+  margin-bottom: 50px;
 }
 
 .textarea,
@@ -62,11 +62,17 @@
 .comment-btn:focus {
   height: 50px;
   width: 30%;
-  background-color: #EFC81A; 
+  background-color: #efc81a;
   color: #ffffff;
   font-size: 20px;
   font-weight: 500;
   border: none;
   border-radius: 8px;
   outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .video-btn {
+    width: 50%;
+  }
 }

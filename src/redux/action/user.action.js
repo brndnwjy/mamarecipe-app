@@ -17,7 +17,7 @@ export const login = (dataForm, navigate) => async (dispatch) => {
     console.log(user);
     localStorage.setItem("token", user.token);
     localStorage.setItem("user", JSON.stringify(user.user));
-    dispatch({ type: "LOGIN_SUCCESS", payload: user });
+    dispatch({ type: "LOGIN_SUCCESS", payload: user.user });
     navigate("/");
   } catch (error) {
     swal({
@@ -45,7 +45,43 @@ export const register = (dataForm, navigate) => async (dispatch) => {
     dispatch({ type: "REGISTER_SUCCESS" });
     navigate("/login");
   } catch (error) {
-    console.log(error);
+    swal({
+      title: "Register Failed",
+      text: `Your E-mail have been registered`,
+      icon: "error",
+    });
     dispatch({ type: "REGISTER_ERROR" });
+  }
+};
+
+export const update = (id, token, dataForm, navigate) => async (dispatch) => {
+  try {
+    dispatch({ type: "UPDATE_PENDING" });
+    await axios.put(
+      `${process.env.REACT_APP_API_BACKEND}/user/${id}`,
+      dataForm, { headers : { Authorization : `Bearer ${token}`}}
+    );
+    swal({
+      title: "Updated",
+      text: `Your account successfully updated`,
+      icon: "success",
+    });
+
+    const result = await axios.get(
+      `${process.env.REACT_APP_API_BACKEND}/user/${id}`
+    );
+
+    const user = result.data.data[0];
+
+    dispatch({ type: "UPDATE_SUCCESS", payload: user });
+    navigate("/");
+  } catch (error) {
+    console.log(error.response)
+    swal({
+      title: "Update Failed",
+      text: `Make sure your data is correct`,
+      icon: "error",
+    });
+    dispatch({ type: "UPDATE_ERROR" });
   }
 };

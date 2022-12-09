@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import { Helmet } from "react-helmet";
 import styles from "./insert.module.css";
 
-import Navi from "../../../components/module/navi";
+import Navi from "../../../components/module/navi/logged";
 import Footer from "../../../components/module/footer";
 import Input from "../../../components/base/input";
 import FileInput from "../../../components/base/fileinput";
@@ -48,7 +48,7 @@ const Insert = () => {
     formData.append("ingredient", recipeForm.ingredient);
     formData.append("photo", photo);
 
-    dispatch(addRecipe(formData, localToken, navigate))
+    dispatch(addRecipe(formData, localToken, navigate));
     // axios.post("http://localhost:4000/v1/recipe/", formData, {
     //   headers: {
     //     Authorization : `Bearer ${localToken}`

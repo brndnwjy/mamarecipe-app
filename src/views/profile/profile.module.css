@@ -1,8 +1,4 @@
-.account > img {
-  border-radius: 50%;
-}
-
-.account button {
+.pen-btn {
   position: relative;
   bottom: 25px;
   left: 15%;
@@ -10,17 +6,39 @@
   border: none;
 }
 
-.avatar {
-  max-height: 650px;
-  max-width: 650px;
+.name input {
+  width: 200px;
+  height: 50px;
+  font-size: 32px;
+  text-align: center;
 }
 
-.hl {
+.avatar {
+  max-height: 500px;
+  max-width: 500px;
+  border: none;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.edit-btn {
+  margin-top: 25px;
+  width: 200px;
+  height: 50px;
+  background-color: #f4f4f4;
+  color: #666666;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* .hl {
   position: absolute;
   left: 0;
   bottom: 135px;
   border-bottom: 2px solid #dfdfdf;
-}
+} */
 
 .tab-btn {
   display: inline-flex;
@@ -41,7 +59,9 @@
         margin: 0;
     }
 
-    .hl {
-      bottom: 150px
+    .name input {
+      width: 150px;
+      height: 40px;
+      font-size: 24px;
     }
 }

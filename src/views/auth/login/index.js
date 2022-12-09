@@ -8,6 +8,7 @@ import styles from "../auth.module.css";
 import Banner from "../../../components/module/auth-banner";
 import Input from "../../../components/base/input";
 import Button from "../../../components/base/button";
+import swal from "sweetalert";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const Login = () => {
     password: "",
   });
 
+  const [tnc, setTnc] = useState(false);
+
   const handleInput = (e) => {
     setLoginForm({
       ...loginForm,
@@ -27,6 +30,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!tnc) {
+      return swal({
+        title: "Invalid",
+        text: `Please check the box before logging in`,
+        icon: "error",
+      });
+    }
 
     dispatch(login(loginForm, navigate));
   };
@@ -57,6 +68,7 @@ const Login = () => {
               type="email"
               placeholder="examplexxx@gmail.com"
               onchange={handleInput}
+              value={loginForm.email}
               classname={`my-2 ${styles.input}`}
             />
             <Input
@@ -66,10 +78,11 @@ const Login = () => {
               type="password"
               placeholder="Password"
               onchange={handleInput}
+              value={loginForm.password}
               classname={`mt-2 mb-3 ${styles.input}`}
             />
             <div className={`d-flex align-items-center ${styles.tnc}`}>
-              <input type="checkbox" />
+              <input type="checkbox" onClick={() => setTnc(true)} />
               <span>I agree to terms & conditions</span>
             </div>
             <Button

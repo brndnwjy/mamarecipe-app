@@ -9,11 +9,14 @@ import headerimage from "../../assets/headerimage.png";
 import styles from "./home.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../../redux/action/recipe.action";
+import { getAll, searchRecipe } from "../../redux/action/recipe.action";
+import NaviLogged from "../../components/module/navi/logged";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
 
   const { recipe } = useSelector((state) => state.recipe.recipe);
 
@@ -27,29 +30,36 @@ const Home = () => {
 
   useEffect(() => {
     getRecipe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState();
 
-  const handleSearch = (e) => {
-    if(e.key === "Enter"){
-      navigate(`/search?q=${search}`)
+  const handleSearch = async (e) => {
+    if (e.key === "Enter") {
+      await dispatch(searchRecipe(search));
+      navigate(`/search?q=${search}`);
     }
-  }
+  };
 
   return (
     <Fragment>
-      <Navi />
+      {token ? <NaviLogged /> : <Navi />}
       <main>
         <section className={`d-flex container ${styles.header}`}>
           <div className={`col-12 col-md-9 ${styles.subheader}`}>
-            <h1 className="col-8">Discover Recipe & Delicious Food</h1>
+            <h1 className="col-10 col-md-8">Discover Recipe & Delicious Food</h1>
             <div
-              className={`d-flex align-items-center col-8 ${styles.searchbar}`}
+              className={`d-flex align-items-center col-10 col-md-8 ${styles.searchbar}`}
             >
               <img src={searchicon} alt="" />
-              <input name="search" type="text" placeholder="Search Recipe" onChange={(e) => setSearch(e.target.value)}  onKeyDown={handleSearch}/>
+              <input
+                name="search"
+                type="text"
+                placeholder="Search Recipe"
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={handleSearch}
+              />
             </div>
           </div>
 
@@ -100,9 +110,16 @@ const Home = () => {
             <h2>Popular Recipe</h2>
           </div>
           <div className="d-flex flex-md-row flex-column justify-content-between flex-wrap">
-            {recipe ? recipe.map((item) => (
-              <Card img={item.photo} title={item.title} onclick={() => navigate(`/${item.recipe_id}`)} style={{marginLeft: "0"}}/>
-            )) : ""}
+            {recipe
+              ? recipe.map((item) => (
+                  <Card
+                    img={item.photo}
+                    title={item.title}
+                    onclick={() => navigate(`/${item.recipe_id}`)}
+                    style={{ marginLeft: "0" }}
+                  />
+                ))
+              : ""}
           </div>
         </section>
       </main>

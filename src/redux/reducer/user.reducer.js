@@ -38,6 +38,23 @@ const userReducer = (state = initialState, action) => {
         isLoading: false,
       };
 
+    case "UPDATE_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "UPDATE_SUCCESS":
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
+    case "UPDATE_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     default:
       return state;
   }

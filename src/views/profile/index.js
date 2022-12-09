@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Navi from "../../components/module/navi";
+import Navi from "../../components/module/navi/logged";
 import Footer from "../../components/module/footer";
 import Card from "../../components/module/card";
 import MyCard from "../../components/module/myCard";
@@ -13,17 +13,24 @@ import headerimage from "../../assets/headerimage.png";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteRecipe, getMyRecipe } from "../../redux/action/recipe.action";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/base/input";
+import { update } from "../../redux/action/user.action";
 
 const Profile = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const localToken = localStorage.getItem("token")
-  const {user: data} = useSelector((state) => state.user)
-  const {myrecipe} = useSelector((state) => state.recipe)
+  const localToken = localStorage.getItem("token");
+  const { user } = useSelector((state) => state.user);
+  const { myrecipe } = useSelector((state) => state.recipe);
 
-  const [avatar, setAvatar] = useState('')
+  const [editorMode, setEditorMode] = useState(false);
+  const [avatar, setAvatar] = useState("");
   const [activetab, setActivetab] = useState("myrecipe");
+
+  const [username, setUsername] = useState("");
+  const [file, setFile] = useState();
+  const [preview, setPreview] = useState();
 
   const getRecipe = async () => {
     try {
@@ -33,24 +40,54 @@ const Profile = () => {
     }
   };
 
-  const removeRecipe = async(recipe_id) => {
+  const removeRecipe = async (recipe_id) => {
     try {
-      dispatch(deleteRecipe(localToken, recipe_id, navigate))
+      dispatch(deleteRecipe(localToken, recipe_id, navigate));
+      dispatch(getMyRecipe(localToken));
+      navigate("/profile")
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const handleAvatar = (e) => {
+    setFile(e.target.files[0]);
+    setPreview([URL.createObjectURL(e.target.files[0])]);
+  };
+
+  const handleProfile = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData();
+    if (username) {
+      formData.append("name", username);
+    }
+
+    if (file) {
+      formData.append("avatar", file);
+    }
+
+    dispatch(update(user.user_id, localToken, formData, navigate));
+
+    // axios.put(
+    //   `${process.env.REACT_APP_API_BACKEND}/user/${user.user_id}`,
+    //   formData,
+    //   {
+    //     headers: { Authorization: `Bearer ${localToken}` },
+    //   }
+    // );
+  };
 
   useEffect(() => {
     getRecipe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if(data.user.avatar){
-      setAvatar(data.user.avatar)
+    if (user.avatar) {
+      setAvatar(user.avatar);
     }
-  }, [data])
+  }, [user]);
 
   return (
     <Fragment>
@@ -60,17 +97,63 @@ const Profile = () => {
       >
         <section className="mb-5 d-flex flex-column align-items-center justify-content-center">
           <div
-            className={`d-flex flex-column align-items-center justify-content-center ${styles.account}`}
+            className={`d-flex flex-column align-items-center justify-content-center`}
           >
-            <img src={avatar ? avatar : dummy} alt="avatar" className={`col-4 ${styles.avatar}`} />
-            <button>
+            {editorMode ? (
+              <>
+                <label
+                  htmlFor="avatar"
+                  className="d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    src={preview ? preview : avatar}
+                    alt="avatar"
+                    className={`col-4 ${styles.avatar}`}
+                  />
+                </label>
+                <input
+                  id="avatar"
+                  name="avatar"
+                  type="file"
+                  onChange={handleAvatar}
+                  hidden
+                />
+              </>
+            ) : (
+              <img
+                src={avatar ? avatar : dummy}
+                alt="avatar"
+                className={`col-4 ${styles.avatar}`}
+              />
+            )}
+            <button
+              className={styles["pen-btn"]}
+              onClick={() => setEditorMode(!editorMode)}
+            >
               <img src={editicon} alt="edit icon" />
             </button>
+            {editorMode ? (
+              <div className="">
+                <Input
+                  name="name"
+                  type="name"
+                  placeholder={user && user.name}
+                  onchange={(e) => setUsername(e.target.value)}
+                  classname={styles.name}
+                />
+                <Button
+                  title="Save Changes"
+                  classname={styles["edit-btn"]}
+                  onclick={handleProfile}
+                />
+              </div>
+            ) : (
+              <h2 className="m-0">{user ? user.name : ""}</h2>
+            )}
           </div>
-          <h2>{data ? data.user.name : ""}</h2>
         </section>
 
-        <section className="container mt-5 d-flex flex-column align-items-start justify-content-center">
+        <section className="container mt-3 d-flex flex-column align-items-start justify-content-center">
           <div
             className={`w-100 d-flex justify-content-between justify-content-md-start ${styles["tab-option"]}`}
           >
@@ -89,16 +172,23 @@ const Profile = () => {
               classname={styles["tab-btn"]}
               onclick={() => setActivetab("likedrecipe")}
             />
-          <div className={`w-100 ${styles.hl}`} />
+            {/* <div className={`w-100 ${styles.hl}`} /> */}
           </div>
-
 
           <div className="mt-5 col-12">
             {activetab === "myrecipe" ? (
               <div className="d-flex flex-md-row flex-column justify-content-center justify-content-md-start flex-wrap">
-                {myrecipe ? myrecipe.map((item) => (
-                  <MyCard img={item.photo} title={item.title} onrecipe={() => navigate(`/${item.recipe_id}`)} onedit={() => navigate(`/edit/${item.recipe_id}`)} ondelete={() => removeRecipe(item.recipe_id)}/>
-                )) : ""}
+                {myrecipe
+                  ? myrecipe.map((item) => (
+                      <MyCard
+                        img={item.photo}
+                        title={item.title}
+                        onrecipe={() => navigate(`/${item.recipe_id}`)}
+                        onedit={() => navigate(`/edit/${item.recipe_id}`)}
+                        ondelete={() => removeRecipe(item.recipe_id)}
+                      />
+                    ))
+                  : ""}
               </div>
             ) : activetab === "savedrecipe" ? (
               <div className="d-flex flex-md-row flex-column align-content-center justify-content-center justify-content-md-start flex-wrap">
