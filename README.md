@@ -1,6 +1,9 @@
 # Mamarecipe (Frontend)
 
 <!-- Logo -->
+<div align="center">
+<img src="./documentation/logo.svg" align="center" width="200" height="auto" />
+</div>
 
 <!-- Table of Contents -->
 ## Table of Contents
@@ -103,6 +106,64 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- Screenshoots -->
 ## Screenshoots
+<table>
+  <tr>
+    <td><image src="./documentation/register.jpeg" alt="Register" width=100% ></td>
+    <td><image src="./documentation/login.jpeg" alt="Login" width=100%/></td>
+  </tr>
+  <tr>
+    <td align="center">Register</td>
+    <td align="center">Login</td>
+  </tr>
+  
+  <tr>
+    <td><image src="./documentation/forgot-password.jpeg" alt="Forgot Password" width=100%></td>
+    <td><image src="./documentation/reset-password.jpeg" alt="Reset Password" width=100%></td>
+  </tr>
+  <tr>
+      <td align="center">Forgot Password</td>
+      <td align="center">Reset Password</td>
+  </tr>
+
+  <tr>
+    <td><image src="./documentation/landing.jpeg" alt="Landing Page" width=100%></td>
+    <td><image src="./documentation/landing-popular.jpeg" alt="Landing Page - popular Sect." width=100%/></td>
+  </tr>
+   <tr>
+    <td align="center">Landing Page</td>
+    <td align="center">Landing Page - Popular Section</td>
+  </tr>
+  
+  <tr>
+    <td><image src="./documentation/profile-detail.jpeg" alt="Profile Detail" width=100%></td>
+    <td><image src="./documentation/recipe-delete.jpeg" alt="Recipe - Delete" width=100%></td>
+  </tr>
+  <tr>
+      <td align="center">Profile</td>
+       <td align="center">Recipe - Delete</td>
+  </tr>
+  
+  <tr>
+    <td><image src="./documentation/recipe-insert.jpeg" alt="Recipe - Insert" width=100%></td>
+    <td><image src="./documentation/recipe-edit.jpeg" alt="Recipe - Edit" width=100%></td>
+  </tr>
+  <tr>
+      <td align="center">Recipe - Insert</td>
+     <td align="center">Recipe - Edit</td>
+  </tr>
+  
+  <tr>
+    <td><image src="./documentation/recipe-detail.jpeg" alt="Recipe - Detail" width=100%></td>
+    <td><image src="./documentation/recipe-detail-video.jpeg" alt="Recipe - Detail Video" width=100%></td>    
+  </tr>
+  <tr>
+     <td align="center">Recipe - Detail</td>
+     <td align="center">Recipe - Detail Video</td>
+  </tr>
+</table>
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Related Projects -->
 ## Related Project
