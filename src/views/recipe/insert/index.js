@@ -13,6 +13,7 @@ import Button from "../../../components/base/button";
 import imageicon from "../../../assets/imageicon.svg";
 import { addRecipe } from "../../../redux/action/recipe.action";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet";
 
 const Insert = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ const Insert = () => {
   };
   return (
     <Fragment>
+      <Helmet>
+        <title>Mamarecipe - New Recipe</title>
+      </Helmet>
       <Navi />
       <form
         onSubmit={handleUpload}

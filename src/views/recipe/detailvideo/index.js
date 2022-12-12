@@ -5,10 +5,14 @@ import Footer from "../../../components/module/footer";
 import Step1 from "../../../assets/step1.jpg";
 import Step2 from "../../../assets/step2.jpg";
 import Step3 from "../../../assets/step3.jpg";
+import { Helmet } from "react-helmet";
 
 const DetailVideo = () => {
   return (
     <Fragment>
+      <Helmet>
+        <title>Mamarecipe - Video Detail</title>
+      </Helmet>
       <Navi />
       <main
         className={`container d-flex flex-column flex-md-row align-items-start justify-content-between`}

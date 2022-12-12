@@ -15,6 +15,7 @@ import { deleteRecipe, getMyRecipe } from "../../redux/action/recipe.action";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/base/input";
 import { update } from "../../redux/action/user.action";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -91,6 +92,9 @@ const Profile = () => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Mamarecipe - {user.name}'s Profile</title>
+      </Helmet>
       <Navi />
       <main
         className={`d-flex flex-column align-items-center justify-content-center`}

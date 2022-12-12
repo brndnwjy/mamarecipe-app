@@ -46,6 +46,7 @@ const Login = () => {
     <>
       <Helmet>
         <title>Log In</title>
+        <link rel="icon" type="image/x-icon" href="/src/assets/logo.svg" />
       </Helmet>
       <div className={styles.wrapper}>
         <div className="col-md-5">

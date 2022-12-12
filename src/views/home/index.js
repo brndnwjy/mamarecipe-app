@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, searchRecipe } from "../../redux/action/recipe.action";
 import NaviLogged from "../../components/module/navi/logged";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ const Home = () => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Mamarecipe - Home</title>
+      </Helmet>
       {token ? <NaviLogged /> : <Navi />}
       <main>
         <section className={`d-flex container ${styles.header}`}>

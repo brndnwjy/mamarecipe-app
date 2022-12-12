@@ -13,6 +13,7 @@ import imageicon from "../../../assets/imageicon.svg";
 import { updateRecipe } from "../../../redux/action/recipe.action";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Insert = () => {
   const dispatch = useDispatch();
@@ -75,6 +76,9 @@ const Insert = () => {
   };
   return (
     <Fragment>
+      <Helmet>
+        <title>Mamarecipe - Edit {detail.title}</title>
+      </Helmet>
       <Navi />
       <form
         onSubmit={handleUpload}

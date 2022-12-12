@@ -12,6 +12,7 @@ const Reset = () => {
     <>
       <Helmet>
         <title>Reset Password</title>
+        <link rel="icon" type="image/x-icon" href="/src/assets/logo.svg" />
       </Helmet>
       <div className={styles.wrapper}>
         <div className="col-md-5">

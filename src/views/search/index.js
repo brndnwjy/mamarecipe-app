@@ -10,6 +10,7 @@ import styles from "./search.module.css";
 import searchicon from "../../assets/searchicon.svg";
 import { searchRecipe } from "../../redux/action/recipe.action";
 import NaviLogged from "../../components/module/navi/logged";
+import { Helmet } from "react-helmet";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -19,8 +20,8 @@ const Search = () => {
 
   const { recipe, pagination } = useSelector((state) => state.recipe.recipe);
 
-  // const queryParams = new URLSearchParams(window.location.search);
-  // const q = queryParams.get("q");
+  const queryParams = new URLSearchParams(window.location.search);
+  const q = queryParams.get("q");
 
   const [search, setSearch] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,6 +56,9 @@ const Search = () => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title> Mamarecipe - Search result : {q}</title>
+      </Helmet>
       {token ? <NaviLogged /> : <Navi />}
 
       <main>

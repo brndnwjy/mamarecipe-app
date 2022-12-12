@@ -9,6 +9,7 @@ import playicon from "../../../assets/playicon.svg";
 import Ayudia from "../../../assets/ayudia.png";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Detail = () => {
   const navigate = useNavigate();
@@ -46,6 +47,9 @@ const Detail = () => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Mamarecipe - {title}</title>
+      </Helmet>
       <Navi />
       <main className={`container d-flex flex-column`}>
         <section
