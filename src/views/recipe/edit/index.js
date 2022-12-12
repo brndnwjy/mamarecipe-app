@@ -30,7 +30,7 @@ const Insert = () => {
   const [preview, setPreview] = useState();
 
   const getDetail = async () => {
-    const result = await axios.get(`http://localhost:4000/v1/recipe/${id}`);
+    const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/recipe/${id}`);
     setDetail(result.data.data[0]);
     if (result.data.data[0].photo) {
       setPreview(result.data.data[0].photo);

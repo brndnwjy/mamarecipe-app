@@ -49,18 +49,6 @@ const Insert = () => {
     formData.append("photo", photo);
 
     dispatch(addRecipe(formData, localToken, navigate));
-    // axios.post("http://localhost:4000/v1/recipe/", formData, {
-    //   headers: {
-    //     Authorization : `Bearer ${localToken}`
-    //   }
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     return navigate("/insert");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
   return (
     <Fragment>
