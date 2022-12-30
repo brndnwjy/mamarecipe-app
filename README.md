@@ -124,32 +124,23 @@ Contributions are what make the open source community such an amazing place to b
       <td align="center">Forgot Password</td>
       <td align="center">Reset Password</td>
   </tr>
-
-  <tr>
-    <td><image src="./documentation/landing.jpeg" alt="Landing Page" width=100%></td>
-    <td><image src="./documentation/landing-popular.jpeg" alt="Landing Page - popular Sect." width=100%/></td>
-  </tr>
-   <tr>
-    <td align="center">Landing Page</td>
-    <td align="center">Landing Page - Popular Section</td>
-  </tr>
   
   <tr>
-    <td><image src="./documentation/profile-detail.jpeg" alt="Profile Detail" width=100%></td>
-    <td><image src="./documentation/recipe-delete.jpeg" alt="Recipe - Delete" width=100%></td>
-  </tr>
-  <tr>
-      <td align="center">Profile</td>
-       <td align="center">Recipe - Delete</td>
-  </tr>
-  
-  <tr>
-    <td><image src="./documentation/recipe-insert.png" alt="Recipe - Insert" width=100%></td>
+    <td><image src="./documentation/mamarecipe-arx.netlify.app_ (1).png" alt="Landing Page" width=100%></td>  
     <td><image src="./documentation/recipe-detail.png" alt="Recipe - Detail" width=100%></td>
   </tr>
   <tr>
+      <td align="center">Landing Page</td>
+       <td align="center">Recipe - Detail</td>
+  </tr>
+  
+   <tr>
+    <td><image src="./documentation/mamarecipe-arx.netlify.app_insert (1).png" alt="Insert Recipe" width=100%></td>
+    <td><image src="./documentation/profilee.png" alt="Profile" width=100%></td>
+  </tr>
+  <tr>
       <td align="center">Recipe - Insert</td>
-     <td align="center">Recipe - Detail</td>
+       <td align="center">Profile</td>
   </tr>
 </table>
 
