@@ -1,34 +1,36 @@
 .card {
-    width: 350px;
-    height: 350px;
-    border: 0;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
-    margin-bottom: 20px;
-    cursor: pointer;
+  width: 350px;
+  height: 350px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .card img {
-    object-fit: cover;
-    aspect-ratio: 1;
-    width: 350px;
-    height: 350px;
-    border: 0;
-    border-radius: 8px;
-    margin: 0;
+  object-fit: cover;
+  aspect-ratio: 1;
+  width: 350px;
+  height: 350px;
+  border: 0;
+  border-radius: 8px;
+  margin: 0;
 }
 
 .card span {
-    position: relative;
-    bottom: 50px;
-    color: #ffffff;
-    font-size: 26px;
-    font-weight: 500;
+  position: relative;
+  bottom: 50px;
+  padding: 0 5px;
+  background-color: #25252588;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 500;
 }
 
 @media only screen and (max-width: 600px) {
-    .card {
-        margin: 20px 0 0 0;
-    }
+  .card {
+    margin: 20px 0 0 0;
+  }
 }

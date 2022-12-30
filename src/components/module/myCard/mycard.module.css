@@ -25,6 +25,8 @@
 .mycard-img span {
   position: relative;
   bottom: 50px;
+  padding: 0 5px;
+  background-color: #25252588;
   color: #ffffff;
   font-size: 26px;
   font-weight: 500;
