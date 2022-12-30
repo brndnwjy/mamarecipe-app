@@ -77,7 +77,7 @@ const Insert = () => {
   return (
     <Fragment>
       <Helmet>
-        <title>Mamarecipe - Edit {detail.title}</title>
+        <title>Mamarecipe - Edit</title>
       </Helmet>
       <Navi />
       <form
