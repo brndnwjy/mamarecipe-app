@@ -144,21 +144,12 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./documentation/recipe-insert.jpeg" alt="Recipe - Insert" width=100%></td>
-    <td><image src="./documentation/recipe-edit.jpeg" alt="Recipe - Edit" width=100%></td>
+    <td><image src="./documentation/recipe-insert.png" alt="Recipe - Insert" width=100%></td>
+    <td><image src="./documentation/recipe-detail.png" alt="Recipe - Detail" width=100%></td>
   </tr>
   <tr>
       <td align="center">Recipe - Insert</td>
-     <td align="center">Recipe - Edit</td>
-  </tr>
-  
-  <tr>
-    <td><image src="./documentation/recipe-detail.jpeg" alt="Recipe - Detail" width=100%></td>
-    <td><image src="./documentation/recipe-detail-video.jpeg" alt="Recipe - Detail Video" width=100%></td>    
-  </tr>
-  <tr>
      <td align="center">Recipe - Detail</td>
-     <td align="center">Recipe - Detail Video</td>
   </tr>
 </table>
 
