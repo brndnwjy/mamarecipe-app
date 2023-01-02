@@ -126,17 +126,17 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./documentation/mamarecipe-arx.netlify.app_ (1).png" alt="Landing Page" width=100%></td>  
+    <td><image src="./documentation/home.png" alt="Homepage" width=100%></td>  
     <td><image src="./documentation/recipe-detail.png" alt="Recipe - Detail" width=100%></td>
   </tr>
   <tr>
-      <td align="center">Landing Page</td>
+      <td align="center">Homepage</td>
        <td align="center">Recipe - Detail</td>
   </tr>
   
    <tr>
-    <td><image src="./documentation/mamarecipe-arx.netlify.app_insert (1).png" alt="Insert Recipe" width=100%></td>
-    <td><image src="./documentation/profilee.png" alt="Profile" width=100%></td>
+    <td><image src="./documentation/recipe-add.png" alt="Insert Recipe" width=100%></td>
+    <td><image src="./documentation/profile-detail.png" alt="Profile" width=100%></td>
   </tr>
   <tr>
       <td align="center">Recipe - Insert</td>
@@ -150,8 +150,6 @@ Contributions are what make the open source community such an amazing place to b
 <!-- Related Projects -->
 ## Related Project
 :rocket: [`Mamarecipe (Backend)`](https://github.com/brndnwjy/mamarecipe-api)
-
-<!-- :rocket: [`Mamarecipe Web Service`](https://zany-tan-beetle-kit.cyclic.app/) -->
 
 :rocket: [`Mamarecipe App Demo`](https://mamarecipe-arx.netlify.app/)
 
